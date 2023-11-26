@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../../styles/index.css";
 import { Context } from "../store/appContext.js";
 
-export const AddContact = () => {
+export const UpdateContact = () => {
     const { store, actions } = useContext(Context);
     const [ name, setName ] = useState("");
     const [ address, setAddress ] = useState("");
@@ -11,16 +11,17 @@ export const AddContact = () => {
     const [ email, setEmail ] = useState("");
     const navigate = useNavigate();
 
+
     const handleOnSubmit = (event) =>{
         event.preventDefault();
-        const newContact = {
+        const contact = {
             full_name: name,
             address: address,
             phone: phone,
             email: email,
             agenda_slug: 'Merlina'
         };
-        actions.createContact(newContact);
+        actions.actualiceContact(contact, id);
         navigate('/')
     }
 
