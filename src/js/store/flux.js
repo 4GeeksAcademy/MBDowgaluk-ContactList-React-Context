@@ -15,7 +15,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			],
 			baseUrl: 'https://playground.4geeks.com/apis/fake/contact',
 			agenda: 'Merlina',
-			user:[]
+			user:[],
+			currentId: '',
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -74,8 +75,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log('Error: ', response.status, response.statusText)
 				}
 			},
-			actualiceContact: async (contact, id) =>{
-				const url = getStore().baseUrl + '/' + id;
+			getcurrentId: (id) =>{
+				setStore({currentId: id})
+			},
+			actualiceContact: async (contact) =>{
+				const url = getStore().baseUrl + '/' + getStore().currentId;
 				const options = {
 					method: 'PUT',
             		headers: {
@@ -93,15 +97,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			deleteAgenda: async() =>{
 				const url = getStore().baseUrl + '/agenda/' + getStore().agenda;
+				console.log(url);
         		const options = {
             		method: 'DELETE',
         		};
         		const response = await fetch(url, options);
+				console.log(response);
         		if (response.ok){
-            		const data = await response.json();
-            		console.log(data);
-					setStore({user: []});
-					/*getActions().getContacts();*/
+            		//const data = await response.json();
+					//getActions().getContacts();
+					setStore({user: []})
 				} else {
            			 console.log('Error: ', response.status, response.statusText)
         		}

@@ -21,7 +21,7 @@ export const UpdateContact = () => {
             email: email,
             agenda_slug: 'Merlina'
         };
-        actions.actualiceContact(contact, id);
+        actions.actualiceContact(contact);
         navigate('/')
     }
 
